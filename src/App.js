@@ -1,14 +1,23 @@
 import React, { useEffect, useState } from "react";
-import $ from "jquery";
 import "./styles/App.css";
+
 import {
   BrowserRouter as Router,
   Switch,
   Route,
   Redirect,
 } from "react-router-dom";
-
+import $ from "jquery";
 import { slide as Menu } from "react-burger-menu";
+
+import {
+  images,
+  movingGraphics,
+  movingGraphicsMobile,
+  howDescriptions,
+  useDescriptions,
+} from "./App.data";
+
 import play from "./assets/play-48.png";
 
 import search from "./assets/search2x.png";
@@ -21,7 +30,7 @@ import testimonial from "./assets/testimonial.jpeg";
 
 import About from "./About";
 import { World } from "./components/World";
-import { images, movingGraphics, movingGraphicsMobile } from "./App.data";
+import Footer from "./components/Footer";
 
 const cacheImages = async (srcArray) => {
   const promises = await srcArray.map((src) => {
@@ -41,6 +50,7 @@ var text_three_value;
 
 function App() {
   const isMobile = useMediaQuery({ maxWidth: 1224 });
+
   return (
     <div className="wrapper">
       <header className="header">
@@ -146,38 +156,37 @@ function Home() {
           </div>
 
           {/* Moving Graphics */}
-
-          {isMobile ? (
-            <div className="moving-graphics-container">
-              {movingGraphicsMobile.map((graphic) => {
-                return (
-                  <img
-                    className="moving-graphics-image-mobile"
-                    style={{
-                      left: graphic.left,
-                      top: graphic.top,
-                    }}
-                    src={graphic.img}
-                  />
-                );
-              })}
-            </div>
-          ) : (
-            <div className="moving-graphics-container">
-              {movingGraphics.map((graphic) => {
-                return (
-                  <img
-                    className="moving-graphics-image"
-                    style={{
-                      left: graphic.left,
-                      top: graphic.top,
-                    }}
-                    src={graphic.img}
-                  />
-                );
-              })}
-            </div>
-          )}
+          <div className="moving-graphics-container">
+            {isMobile
+              ? movingGraphicsMobile.map((graphic) => {
+                  return (
+                    <img
+                      className={
+                        isMobile
+                          ? "moving-graphics-image-mobile"
+                          : "moving-graphics-image"
+                      }
+                      style={{
+                        left: graphic.left,
+                        top: graphic.top,
+                      }}
+                      src={graphic.img}
+                    />
+                  );
+                })
+              : movingGraphics.map((graphic) => {
+                  return (
+                    <img
+                      className="moving-graphics-image"
+                      style={{
+                        left: graphic.left,
+                        top: graphic.top,
+                      }}
+                      src={graphic.img}
+                    />
+                  );
+                })}
+          </div>
         </div>
         <div
           className={
@@ -227,405 +236,187 @@ function Home() {
 
       {/* Details */}
 
-      {isMobile ? (
-        <div style={{ paddingTop: isMobile ? 20 : 80 }}>
-          <div
-            style={{
-              zIndex: 1,
-              height: isMobile ? "100%" : "auto",
-              maxWidth: isMobile ? "100%" : "40%",
-              float: isMobile ? null : "left",
-            }}
-          >
-            <img
-              className={isMobile ? "display-phone-mobile" : "display-phone"}
-              src={displayImage}
-            />
-            <img
-              style={{ visibility: "hidden" }}
-              id="sticky-phantom"
-              className="display-phone-mobile"
-              src={displayImage}
-            />
-          </div>
+      <div style={{ paddingTop: isMobile ? 20 : 80 }}>
+        <div
+          style={{
+            zIndex: 1,
+            height: isMobile ? "100%" : "auto",
+            maxWidth: isMobile ? "100%" : "40%",
+            float: isMobile ? null : "left",
+          }}
+        >
+          <img
+            className={isMobile ? "display-phone-mobile" : "display-phone"}
+            src={displayImage}
+          />
+          <img
+            style={{ visibility: "hidden" }}
+            id="sticky-phantom"
+            className="display-phone-mobile"
+            src={displayImage}
+          />
+        </div>
 
-          {/* How it works */}
-          <div
-            className={
-              isMobile
-                ? "display-description-container-mobile"
-                : "display-description-container"
-            }
-          >
+        {/* HOW IT WORKS */}
+        <div
+          className={
+            isMobile
+              ? "display-description-container-mobile"
+              : "display-description-container"
+          }
+        >
+          <h1 id={isMobile ? "headline-title-mobile" : "headline-title"}>
+            How it works
+          </h1>
+          {howDescriptions.map((how) => {
+            return (
+              <div
+                className={
+                  isMobile
+                    ? "description-container-mobile"
+                    : "description-container"
+                }
+              >
+                <img
+                  className={
+                    isMobile
+                      ? "description-container-image-mobile "
+                      : "description-container-image "
+                  }
+                  src={checkmark}
+                />
+                <p
+                  id={how.id}
+                  className={
+                    isMobile
+                      ? "display-description-mobile"
+                      : "display-description"
+                  }
+                >
+                  {how.description}
+                </p>
+              </div>
+            );
+          })}
+
+          {/* USE IT TO */}
+          <div style={{ paddingLeft: isMobile ? "auto" : 50 }}>
             <h1 id={isMobile ? "headline-title-mobile" : "headline-title"}>
-              How it works
+              Use it to
             </h1>
-            <div className="description-container">
-              <img
-                style={{
-                  marginTop: 10,
-                  marginRight: 10,
-                  width: 30,
-                  height: 30,
-                  flexGrow: 1,
-                }}
-                src={checkmark}
-              />
 
-              <p
-                id="text_one"
-                className={
-                  isMobile
-                    ? "display-description-mobile"
-                    : "display-description"
-                }
-              >
-                Ask a question.
-              </p>
-            </div>
-            <div className="description-container">
-              <img
-                style={{
-                  marginTop: 10,
-                  marginRight: 10,
-                  width: 30,
-                  height: 30,
-                  flexGrow: 1,
-                }}
-                src={checkmark}
-              />
-
-              <p
-                id="text_one"
-                className={
-                  isMobile
-                    ? "display-description-mobile"
-                    : "display-description"
-                }
-              >
-                Let's face it. The internet is humongous, but there are times
-                when you just don't feel like hunting and searching through the
-                web to find what you're looking for. Kurbs does all of the work
-                for you, by automatically taking your search question and
-                searching the entire internet for relevant results, then sorting
-                them into Books (knowledge), Scriptures (quotes), Tweets (latest
-                news), Audio (podcasts), and Videos (tutorials).
-              </p>
-            </div>
-            <div className="description-container">
-              <img
-                style={{
-                  marginTop: 10,
-                  marginRight: 10,
-                  width: 30,
-                  height: 30,
-                  flexGrow: 1,
-                }}
-                src={checkmark}
-              />
-
-              <p
-                id="text_two"
-                className={
-                  isMobile
-                    ? "display-description-mobile"
-                    : "display-description"
-                }
-              >
-                Never waste time searching through myriad of irrelevant
-                material. Kurbs organizes content from the web, so you spend
-                less time looking for it and more time digesting it.
-              </p>
-            </div>
-            <div className="description-container">
-              <img
-                style={{
-                  marginTop: 10,
-                  marginRight: 10,
-                  width: 30,
-                  height: 30,
-                  flexGrow: 1,
-                }}
-                src={checkmark}
-              />
-
-              <p
-                id="text_two"
-                className={
-                  isMobile
-                    ? "display-description-mobile"
-                    : "display-description"
-                }
-              >
-                As an added bonus, this app also allows to take notes and
-                discuss results with others. So simple, yet so insanely useful.
-              </p>
-            </div>
-
-            <div className="description-container">
-              <img
-                style={{
-                  marginTop: 10,
-                  marginRight: 10,
-                  width: 30,
-                  height: 30,
-                  flexGrow: 1,
-                }}
-                src={checkmark}
-              />
-
-              <p
-                id="text_three"
-                className={
-                  isMobile
-                    ? "display-description-mobile"
-                    : "display-description"
-                }
-              >
-                You’ll save hours of research into any topic and find smarter,
-                more insightful discussions in the same time.
-              </p>
-            </div>
-            {/* Use it to */}
-            <div>
-              <h1 id={isMobile ? "headline-title-mobile" : "headline-title"}>
-                Use it to
-              </h1>
-              <div
-                style={{
-                  backgroundColor: "white",
-                  padding: 16,
-                  borderRadius: 8,
-                  marginBottom: 16,
-                  // display: "inline-block",
-                }}
-              >
-                {" "}
-                <h3 style={{ color: "#6e6e73" }}>Study</h3>
-                <ul
-                  style={{
-                    listStyle: "none",
-                    paddingLeft: 0,
-                    color: "#6e6e73",
-                  }}
-                >
-                  {" "}
-                  <li style={{ marginBottom: 16 }}>
-                    - Students who use Kurbs will potentially be able to focus
-                    better upon a specific topic, write more papers, study for
-                    longer and have less stress on tests.
-                  </li>
-                  <li style={{ marginBottom: 16 }}>
-                    - Use it when researching subjects yielding increased
-                    efficiency.
-                  </li>
-                  <li style={{ marginBottom: 16 }}>
-                    - Students can now research with the speed of search engines
-                    and the quality of a librarian.
-                  </li>
-                  <li style={{ marginBottom: 16 }}>
-                    - Search for related information for any topic without
-                    having to make the trip to an actual library.
-                  </li>
-                </ul>
-              </div>
-              <div
-                style={{
-                  backgroundColor: "white",
-                  padding: 16,
-                  borderRadius: 8,
-                  marginBottom: 16,
-                }}
-              >
-                {" "}
-                <h3 style={{ color: "#6e6e73" }}>Seek advice</h3>
-                <ul
-                  style={{
-                    listStyle: "none",
-                    paddingLeft: 0,
-                    color: "#6e6e73",
-                  }}
-                >
-                  <li style={{ marginBottom: 16 }}>
-                    - Entrepreneurs can now learn faster, plus Kurbs will keep
-                    on learning and personalizing itself to your needs..
-                  </li>
-                  <li style={{ marginBottom: 16 }}>
-                    - You will spend less time reading or finding the best
-                    resources and more time applying advice in your business.
-                    Kurbs learns from your questions, then improves its results
-                    over time.
-                  </li>
-                  <li style={{ marginBottom: 16 }}>
-                    - Kurbs is especially valuable to a novice who is starting
-                    their entrepreneurial journey.
-                  </li>
-                </ul>
-              </div>
-
-              <div
-                style={{
-                  backgroundColor: "white",
-                  padding: 16,
-                  borderRadius: 8,
-                  marginBottom: 16,
-                }}
-              >
-                {" "}
-                <h3 style={{ color: "#6e6e73" }}>
-                  Find knowledge,
-                  <br />
-                  for the sake of it
-                </h3>
-                <ul
-                  style={{
-                    listStyle: "none",
-                    paddingLeft: 0,
-                    color: "#6e6e73",
-                  }}
-                >
-                  <li>
-                    - You will have a convenient, simple, fast and cost saving
-                    way to find knowledge.
-                  </li>
-                </ul>
-              </div>
-              <div
-                style={{
-                  backgroundColor: "white",
-                  padding: 16,
-                  borderRadius: 8,
-                  marginBottom: 16,
-                  display: "inline-block",
-                }}
-              >
-                {" "}
-                <h4>
-                  "Kurbs is a powerful tool that has made me more efficient
-                  during my studies. It's helped me to stay up-to-date with the
-                  latest resources and discussions. We can filter our searches
-                  to ensure that we are only receiving results that we want and
-                  are relevant to our field of interest. Kurbs also allows us to
-                  take notes and share these search results with others in our
-                  field of study, helping them to stay up-to-date too."
-                </h4>
-                <div
-                  style={{
-                    display: "flex",
-                    flexDirection: "row",
-                  }}
-                >
-                  <img
+            <div
+              className={"use-container"}
+              style={{
+                flexDirection: isMobile ? "column" : "row",
+                gap: 20,
+              }}
+            >
+              {useDescriptions.map((use) => {
+                return (
+                  <div
                     style={{
-                      marginRight: 8,
-                      borderRadius: 20,
-                      width: 40,
-                      height: 40,
+                      backgroundColor: "white",
+                      padding: 16,
+                      borderRadius: 8,
+                      marginBottom: 16,
+                      width: isMobile ? "auto" : "45%",
                     }}
-                    src={testimonial}
-                  />
-                  <div style={{ display: "flex", flexDirection: "column" }}>
-                    <a style={{ fontWeight: "bold" }}>Francis Castagna</a>
-                    <a>Student</a>
+                  >
+                    <h3 style={{ color: "#6e6e73" }}>{use.title}</h3>
+                    <ul
+                      style={{
+                        listStyle: "none",
+                        paddingLeft: 0,
+                        color: "#6e6e73",
+                      }}
+                    >
+                      {use.descriptions.map((description) => {
+                        return (
+                          <li style={{ marginBottom: 16 }}>- {description}</li>
+                        );
+                      })}
+                    </ul>
                   </div>
+                );
+              })}
+            </div>
+
+            <div
+              style={{
+                backgroundColor: "white",
+                padding: isMobile ? 16 : 24,
+                borderRadius: 8,
+                marginBottom: 16,
+                display: "inline-block",
+              }}
+            >
+              {" "}
+              <h4 style={{ fontSize: isMobile ? "auto" : 25 }}>
+                "Kurbs is a powerful tool that has made me more efficient during
+                my studies. It's helped me to stay up-to-date with the latest
+                resources and discussions. We can filter our searches to ensure
+                that we are only receiving results that we want and are relevant
+                to our field of interest. Kurbs also allows us to take notes and
+                share these search results with others in our field of study,
+                helping them to stay up-to-date too."
+              </h4>
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: "row",
+                }}
+              >
+                <img
+                  style={{
+                    marginRight: 8,
+                    borderRadius: isMobile ? 20 : 40,
+                    width: isMobile ? 40 : 80,
+                    height: isMobile ? 40 : 80,
+                  }}
+                  src={testimonial}
+                />
+                <div style={{ display: "flex", flexDirection: "column" }}>
+                  <a
+                    style={{
+                      fontWeight: "bold",
+                      fontSize: isMobile ? "auto" : 20,
+                    }}
+                  >
+                    Francis Castagna
+                  </a>
+                  <a
+                    style={{
+                      fontSize: isMobile ? "auto" : 20,
+                    }}
+                  >
+                    Student
+                  </a>
                 </div>
               </div>
             </div>
           </div>
         </div>
-      ) : (
-        <div style={{ paddingTop: isMobile ? 20 : 80 }}>
-          <div
-            style={{
-              zIndex: 1,
-              height: isMobile ? "100%" : "auto",
-              maxWidth: isMobile ? "100%" : "40%",
-              float: isMobile ? null : "left",
-            }}
-          >
-            <img
-              className={isMobile ? "display-phone-mobile" : "display-phone"}
-              src={displayImage}
-            />
-            <img
-              style={{ visibility: "hidden" }}
-              id="sticky-phantom"
-              className="display-phone-mobile"
-              src={displayImage}
-            />
-          </div>
-          <div
-            className={
-              isMobile
-                ? "display-description-container-mobile"
-                : "display-description-container"
-            }
-          >
-            <p
-              id="text_one"
-              className={
-                isMobile ? "display-description-mobile" : "display-description"
-              }
-            >
-              When you ask a question, Kurbs will classify the question then go{" "}
-              <br />
-              through relevant Books, <br /> Scriptures, Audio files, and Videos{" "}
-              <br /> to return the best possible answer <br /> at great speed.
-              Saving you hours <br /> of Google search.
-            </p>
-            <p
-              id="text_two"
-              className={
-                isMobile ? "display-description-mobile" : "display-description"
-              }
-            >
-              Organize your searches any way you like. With collections, every
-              one of the answers you find is right where you want it. Create
-              your collections and get to them easily at any time.
-            </p>
-            <p
-              id="text_three"
-              className={
-                isMobile ? "display-description-mobile" : "display-description"
-              }
-            >
-              Take details notes.
-            </p>
-            <p
-              className={
-                isMobile ? "display-description-mobile" : "display-description"
-              }
-            >
-              Expand your mind and explore new ideas by discussing answers with
-              like-minded individuals. If you want to keep everything private
-              there's an option for that.
-            </p>
-            <p
-              className={
-                isMobile ? "display-description-mobile" : "display-description"
-              }
-            >
-              The app brings an infinite amount of results to a finite valuable
-              set of results and ressources. Saving you time and money.
-            </p>
-          </div>
-        </div>
-      )}
+      </div>
 
       <div className={isMobile ? "founder-mobile" : "founder"}>
         <h2 id="founder-title">
           The world’s most important <br /> knowledge, organized.
         </h2>
         <a id={isMobile ? "founder-message-mobile" : "founder-message"}>
-          Kurbs mission is to help bring relevant knowledge to the forefront.
-          Helping you find knowledge faster so that you can continue doing what
-          you love.
+          "Kurbs mission is to help bring relevant knowledge to the forefront.{" "}
+          <br />
+          Helping you find knowledge faster <br />
+          so that you can continue doing what you love."
         </a>
         <br />
-        <small style={{ marginTop: 16 }}>
-          <b>Kerby Jean</b>
-          <br /> Founder
-        </small>
+        <div style={{ marginTop: 20 }}>
+          <small style={{ marginTop: 16 }}>
+            <b style={{ fontSize: isMobile ? "auto" : 20 }}>Kerby Jean</b>
+            <br /> Founder
+          </small>
+        </div>
+
         <div id="founder-button">
           <button
             className="request-button"
@@ -650,33 +441,8 @@ function Home() {
           <World />
         </div>
       </div>
-      <div className="footer">
-        <h2>Kurbs</h2>
-        <a>
-          The world’s most important <br /> knowledge, organized.
-        </a>
-        <div className="footer-navigation">
-          <a href="/about">About</a>
-          <a href="mailto:youremail@domain.tld">Contact Us</a>
-          <a
-            href={
-              "https://www.notion.so/Terms-of-Service-7cc381ae6af14a129c0b7699cafcd157"
-            }
-          >
-            Terms of use
-          </a>
-          <a
-            href={
-              "https://www.notion.so/Privacy-Policy-9829a3cea20945799e82becb39449bf2"
-            }
-          >
-            Privacy Policy
-          </a>
-        </div>
-        <span>© 2021 Kurbs</span>
-      </div>
+      <Footer />
     </div>
   );
 }
-
 export default App;

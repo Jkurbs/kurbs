@@ -51,3 +51,59 @@ export const movingGraphics = [
     img: steve3x,
   },
 ];
+
+export const howDescriptions = [
+  {
+    id: "text_one",
+    description: "Ask a question.",
+  },
+  {
+    id: "text_two",
+    description:
+      "Let's face it. The internet is humongous, but there are times when you just don't feel like hunting and searching through the web to find what you're looking for. Kurbs does all of the work for you, by automatically taking your search question and searching the entire internet for relevant results, then sorting them into Books (knowledge), Scriptures (quotes), Tweets (latest news), Audio (podcasts), and Videos (tutorials).",
+  },
+
+  {
+    id: "text_three",
+    description:
+      "Never waste time searching through myriad of irrelevant material. Kurbs organizes content from the web, so you spend less time looking for it and more time digesting it.",
+  },
+  {
+    id: "text_fourth",
+    description:
+      "As an added bonus, this app also allows to take notes and discuss results with others. So simple, yet so insanely useful.",
+  },
+  {
+    id: "text_fifth",
+    description:
+      "You’ll save hours of research into any topic and find smarter, more insightful discussions in the same time.",
+  },
+];
+
+export const useDescriptions = [
+  {
+    title: "Study",
+    descriptions: [
+      "Students who use Kurbs will potentially be able to focus better upon a specific topic, write more papers, study for longer and have less stress on tests.",
+      "Use it when researching subjects yielding increased efficiency.",
+      "Students can now research with the speed of search engines and the quality of a librarian.",
+      "Search for related information for any topic without having to make the trip to an actual library.",
+    ],
+  },
+
+  {
+    title: "Seek advice",
+    descriptions: [
+      "Entrepreneurs can now learn faster, plus Kurbs will keep on learning and personalizing itself to your needs.",
+      "You will spend less time reading or finding the best resources and more time applying advice in your business. Kurbs learns from your questions, then improves its results over time.",
+      "Kurbs is especially valuable to a novice who is starting their entrepreneurial journey.",
+    ],
+  },
+
+  {
+    title: "Find knowledge,\nfor the sake of it",
+    descriptions: [
+      "You will have a convenient, simple, fast and cost saving way to find knowledge.",
+    ],
+  },
+];

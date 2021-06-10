@@ -16,6 +16,7 @@ import {
   movingGraphicsMobile,
   howDescriptions,
   useDescriptions,
+  testimonial,
 } from "./App.data";
 
 import play from "./assets/play-48.png";
@@ -25,11 +26,13 @@ import collection from "./assets/collections2x.png";
 import conversation from "./assets/conversation2x.png";
 import { useMediaQuery } from "react-responsive";
 import Film from "./components/VideoPlayer";
+import Request from "./Request";
 import checkmark from "./assets/checkmark-64.png";
-import testimonial from "./assets/testimonial.jpeg";
 
 import About from "./About";
 import { World } from "./components/World";
+import testimonialImage from "./assets/testimonial.jpeg";
+
 import Footer from "./components/Footer";
 
 const cacheImages = async (srcArray) => {
@@ -50,7 +53,6 @@ var text_three_value;
 
 function App() {
   const isMobile = useMediaQuery({ maxWidth: 1224 });
-
   return (
     <div className="wrapper">
       <header className="header">
@@ -98,6 +100,7 @@ function App() {
           <Route path="/home" component={Home} />
           <Route path="/about" component={About} />
           <Route path="/film" component={Film} />
+          <Route path="/request" component={Request} />
         </Switch>
       </Router>
     </div>
@@ -200,7 +203,8 @@ function Home() {
               isMobile ? "call-to-action-left-mobile" : "call-to-action-left"
             }
           >
-            <a id="play-text" href="/film">
+            <a onClick={() => alert("Film coming soon")} id="play-text">
+              {/* href="/film" */}
               Watch the film
             </a>
             <a href="/film">
@@ -218,6 +222,8 @@ function Home() {
                 e.preventDefault();
                 window.location.href =
                   "https://s4lnqpx6qg2.typeform.com/to/tPRmF6u3";
+
+                //"/request";
               }}
             >
               <a
@@ -234,9 +240,10 @@ function Home() {
         </div>
       </div>
 
-      {/* Details */}
-
-      <div style={{ paddingTop: isMobile ? 20 : 80 }}>
+      {/* DETAILS */}
+      <div
+        style={{ paddingTop: isMobile ? 20 : 80, backgroundColor: "#f5f5f7" }}
+      >
         <div
           style={{
             zIndex: 1,
@@ -342,31 +349,18 @@ function Home() {
               })}
             </div>
 
+            {/* TESTIMONIAL */}
             <div
+              className="testimonial-container"
               style={{
-                backgroundColor: "white",
                 padding: isMobile ? 16 : 24,
-                borderRadius: 8,
-                marginBottom: 16,
-                display: "inline-block",
               }}
             >
               {" "}
               <h4 style={{ fontSize: isMobile ? "auto" : 25 }}>
-                "Kurbs is a powerful tool that has made me more efficient during
-                my studies. It's helped me to stay up-to-date with the latest
-                resources and discussions. We can filter our searches to ensure
-                that we are only receiving results that we want and are relevant
-                to our field of interest. Kurbs also allows us to take notes and
-                share these search results with others in our field of study,
-                helping them to stay up-to-date too."
+                "{testimonial.description}"
               </h4>
-              <div
-                style={{
-                  display: "flex",
-                  flexDirection: "row",
-                }}
-              >
+              <div id="testimonial-identity-container">
                 <img
                   style={{
                     marginRight: 8,
@@ -374,23 +368,23 @@ function Home() {
                     width: isMobile ? 40 : 80,
                     height: isMobile ? 40 : 80,
                   }}
-                  src={testimonial}
+                  src={testimonialImage}
                 />
-                <div style={{ display: "flex", flexDirection: "column" }}>
+                <div id="testimonial-identity-details-container">
                   <a
                     style={{
                       fontWeight: "bold",
                       fontSize: isMobile ? "auto" : 20,
                     }}
                   >
-                    Francis Castagna
+                    {testimonial.name}
                   </a>
                   <a
                     style={{
                       fontSize: isMobile ? "auto" : 20,
                     }}
                   >
-                    Student
+                    {testimonial.occupation}
                   </a>
                 </div>
               </div>
@@ -398,7 +392,7 @@ function Home() {
           </div>
         </div>
       </div>
-
+      {/* FOUNDER */}
       <div className={isMobile ? "founder-mobile" : "founder"}>
         <h2 id="founder-title">
           The world’s most important <br /> knowledge, organized.
@@ -416,7 +410,6 @@ function Home() {
             <br /> Founder
           </small>
         </div>
-
         <div id="founder-button">
           <button
             className="request-button"

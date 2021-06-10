@@ -6,11 +6,9 @@ function VideoPlayer(props) {
   const isMobile = useMediaQuery({ maxWidth: 1224 });
 
   return (
-    <div className="footer">
+    <div className="footer" style={{ flex: 1, flexDirection: "row" }}>
       <h2>Kurbs</h2>
-      <a>
-        The world’s most important <br /> knowledge, organized.
-      </a>
+      <a>Insights from the world's greatest.</a>
       <div className="footer-navigation">
         <a href="/about">About</a>
         <a href="mailto:youremail@domain.tld">Contact Us</a>

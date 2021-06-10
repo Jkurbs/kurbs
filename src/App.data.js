@@ -6,14 +6,6 @@ import elon3x from "./assets/elon3x.png";
 import chamath3x from "./assets/chamath3x.png";
 import steve3x from "./assets/steve3x.png";
 
-export const arcsData = [1, 2, 3, 4, 5, 6].map(() => ({
-  startLat: (Math.random() - 0.5) * 180,
-  startLng: (Math.random() - 0.5) * 360,
-  endLat: (Math.random() - 0.5) * 180,
-  endLng: (Math.random() - 0.5) * 360,
-  color: [["#000000"][0], ["#000000"][0]],
-}));
-
 export const images = [elon2x, chamath2x, steve2x, elon3x, chamath3x, steve3x];
 
 export const movingGraphicsMobile = [
@@ -101,9 +93,25 @@ export const useDescriptions = [
   },
 
   {
-    title: "Find knowledge,\nfor the sake of it",
+    title: "Find knowledge, for the sake of it",
     descriptions: [
       "You will have a convenient, simple, fast and cost saving way to find knowledge.",
     ],
   },
 ];
+
+export const testimonial = {
+  name: "Francis Castagna",
+  occupation: "Student",
+  image: "./assets/testimonial.jpeg",
+  description:
+    "Kurbs is a powerful tool that has made me more efficient during my studies. It's helped me to stay up-to-date with the latest resources and discussions. We can filter our searches to ensure that we are only receiving results that we want and are relevant to our field of interest. Kurbs also allows us to take notes and share these search results with others in our field of study, helping them to stay up-to-date too.",
+};
+
+export const founder = {
+  name: "Francis Castagna",
+  occupation: "Student",
+  image: "./assets/testimonial.jpeg",
+  description:
+    "Kurbs is a powerful tool that has made me more efficient during my studies. It's helped me to stay up-to-date with the latest resources and discussions. We can filter our searches to ensure that we are only receiving results that we want and are relevant to our field of interest. Kurbs also allows us to take notes and share these search results with others in our field of study, helping them to stay up-to-date too.",
+};
